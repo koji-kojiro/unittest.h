@@ -172,6 +172,14 @@ __test_destructor (void)
 #define skip(expr) __test_body (expr, 1, 1);
 #define unittest __attribute__ ((__constructor__)) void __test_gen_name () (void)
 
+#ifdef NOMAIN
+int
+main (int argc, char *argv[])
+{
+  return 0;
+}
+#endif
+
 #else
 
 #define ok(expr)

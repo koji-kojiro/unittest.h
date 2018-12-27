@@ -109,6 +109,48 @@ summary:
   ✓ 1 tests passed.
 ```
 
+## utest(1)
+`utest(1)` is a tool to execute tests easily from the command line. `utest(1)` can directly execute tests from a script file.
+Here is a example script:
+
+### Installation
+Place the script bin/utest into anywhere included in PATH. The scipt contains complete copy of `unittest.h` so that you don't need to install the header file on your system.
+
+### Usage
+
+```
+$ utest --help
+Usage: utest [options] file
+Options:
+  -D<macro>            define <macro>.
+  -h, --help           show this help and exit.
+  -I<path>             specify include path.
+  -l<lib>              specify shared library to be linked.
+  --no-main            tell compiler that no main function defined in files(s).
+  -v, --version        show version info and exit.
+```
+
+Currently, only very limited compiler options are supported.
+
+Here is an example of test script:
+
+```:.c
+/* note that you don't include "unittest.h" */
+int foo = 100;
+unittest
+{
+  ok (foo < 1000);
+}
+
+/* if you omit main function, specify `--no-main` option */
+```
+
+You can execute this script as follows:
+
+```
+$ utest --no-main your-test-script.c
+```
+
 ## License
 unittest.h is distributed under [MIT License](LICENSE).
 

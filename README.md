@@ -1,5 +1,5 @@
 # test.h
-`test.h` is a simple unittest framework for C programmng language.  
+`test.h` is a simple unit-testing framework for C programmng language.  
 This library is designed to work with gcc, assuming some specific attributes and nested functions are available.
 `test.h` is meant to be a simple but better replacement of traditional `abort` tests.
 The main features are listed below:
@@ -9,7 +9,7 @@ The main features are listed below:
 - can handle segfault.
 - colored reports.
 
-The name of APIs and the output styles are a bit inspired with [Rove](github.com/fukamachi/rove), one of the unittest framework for Common Lisp.  
+The name of APIs and the output styles are a bit inspired with [Rove](github.com/fukamachi/rove), one of the unit-testing framework for Common Lisp.  
 Note that this library is quite experimentally, so use at your own risks.
 
 ## APIs

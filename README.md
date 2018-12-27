@@ -11,6 +11,7 @@ The main features are listed below:
 
 The name of APIs and the output styles are a bit inspired with [Rove](github.com/fukamachi/rove), one of the unit-testing framework for Common Lisp.  
 Note that this library is quite experimentally, so use at your own risks.
+Additionally, `unittest.h` is **NOT** thread-safe.
 
 ## APIs
 

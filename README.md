@@ -34,6 +34,9 @@ You can define these two functions for preparation and cleanup of tests.
 If defined, all the APIs are disabled. 
 You can pass `-DNDEBUG` flag to compiler to disable tests.
 
+### NOMAIN
+If defined, `main` function is automatically added. 
+
 Additionally, note that `unittest.h` installs a signal handler for SIGSEGV. When segmentation fault occurs while running tests, process will be aborted immediately and test will fail. The signal handler basically does nothing, just tries to exit, but if the signal is reported inside tests, you can know in which test case the signal occures.
 
 ## Example

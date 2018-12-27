@@ -111,7 +111,6 @@ summary:
 
 ## utest(1)
 `utest(1)` is a tool to execute tests easily from the command line. `utest(1)` can directly execute tests from a script file.
-Here is a example script:
 
 ### Installation
 Place the script bin/utest into anywhere included in PATH. The scipt contains complete copy of `unittest.h` so that you don't need to install the header file on your system.

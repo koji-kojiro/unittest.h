@@ -134,7 +134,7 @@ Currently, only very limited compiler options are supported.
 Here is an example of test script:
 
 ```:.c
-/* note that you don't include "unittest.h" */
+/* note that you don't need to include "unittest.h" */
 int foo = 100;
 unittest
 {

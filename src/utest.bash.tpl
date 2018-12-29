@@ -11,6 +11,13 @@ macros=()
 incdir=()
 libs=()
 nomain=false
+cc=gcc
+
+function prove-gcc-exists () {
+  if ! type "$cc" >/dev/null 2>&1; then
+    print-error "gcc: Command not found."
+  fi
+}
 
 function print-error() {
   printf "\e[31mError:$1\e[m\n"
@@ -71,7 +78,7 @@ function set-std () {
     print-error "Missing argument after \`-std\`."
     exit 1
   fi
-  if echo | gcc -std="$1" -fsyntax-only -xc - >/dev/null 2>&1; then
+  if echo | "$cc" -std="$1" -fsyntax-only -xc - >/dev/null 2>&1; then
     std=$1
   else
     print-error "Unrecognized option for \`-std\`: $1"
@@ -82,7 +89,7 @@ function set-std () {
 function compile-and-run () {
   local bin=$(mktemp)
   local output="$(\
-    echo "$src" |gcc $(ccflags) -o $bin \
+    echo "$src" | "$cc" $(ccflags) -o $bin \
     2>&1)"
   if [ -x $bin ]; then
     $bin
@@ -96,6 +103,7 @@ function compile-and-run () {
 }
 
 function main () {
+  prove-gcc-exists
   local opt
   for opt in "$@"; do
     case $opt in

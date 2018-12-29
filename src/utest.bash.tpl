@@ -151,6 +151,7 @@ function main () {
        ;;  
     esac
   done
+  print-error "No input file."
 }
 
 main "$@"

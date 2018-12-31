@@ -1,4 +1,4 @@
-#/usr/bin/bash
+#!/usr/bin/bash
 
 readonly version="0.0.1"
 readonly copy="(C) 2018 TANI Kojiro <kojiro0531@gmail.com>"

@@ -71,7 +71,7 @@ __attribute__ ((__destructor__)) void
 __test_destructor (void)
 {
   size_t count = 0;
-  size_t successed = 0;
+  size_t passed = 0;
   size_t skipped = 0;
   size_t failed = 0;
   int result;
@@ -103,7 +103,7 @@ __test_destructor (void)
         }
       else if (result)
         {
-          successed++;
+          passed++;
           printf (
             "  \x1b[32m✓ \"%s\" expected to be true.\x1b[0m\n",
             tmp->code);
@@ -138,20 +138,20 @@ __test_destructor (void)
             printf (
               "  \x1b[36m- %d tests skipped.\x1b[0m\n",
               skipped);
-          if (successed)
+          if (passed)
             printf (
               "  \x1b[32m✓ %d tests passed.\x1b[0m\n",
-              successed);
+              passed);
         }
       else if (skipped)
         {
           printf (
             "  \x1b[36m- %d of %d tests skipped.\x1b[0m\n",
             skipped, count);
-          if (successed)
+          if (passed)
             printf (
             "  \x1b[32m✓ %d tests passed.\x1b[0m\n",
-            successed);
+            passed);
         }
       else
         printf ("  \x1b[32m✓ all tests passed.\x1b[0m\n");

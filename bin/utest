@@ -76,7 +76,7 @@ __attribute__ ((__destructor__)) void
 __test_destructor (void)
 {
   size_t count = 0;
-  size_t successed = 0;
+  size_t passed = 0;
   size_t skipped = 0;
   size_t failed = 0;
   int result;
@@ -108,7 +108,7 @@ __test_destructor (void)
         }
       else if (result)
         {
-          successed++;
+          passed++;
           printf (
             "  \x1b[32m✓ \"%s\" expected to be true.\x1b[0m\n",
             tmp->code);
@@ -143,20 +143,20 @@ __test_destructor (void)
             printf (
               "  \x1b[36m- %d tests skipped.\x1b[0m\n",
               skipped);
-          if (successed)
+          if (passed)
             printf (
               "  \x1b[32m✓ %d tests passed.\x1b[0m\n",
-              successed);
+              passed);
         }
       else if (skipped)
         {
           printf (
             "  \x1b[36m- %d of %d tests skipped.\x1b[0m\n",
             skipped, count);
-          if (successed)
+          if (passed)
             printf (
             "  \x1b[32m✓ %d tests passed.\x1b[0m\n",
-            successed);
+            passed);
         }
       else
         printf ("  \x1b[32m✓ all tests passed.\x1b[0m\n");
@@ -201,6 +201,13 @@ macros=()
 incdir=()
 libs=()
 nomain=false
+cc=gcc
+
+function prove-gcc-exists () {
+  if ! type "$cc" >/dev/null 2>&1; then
+    print-error "gcc: Command not found."
+  fi
+}
 
 function print-error() {
   printf "\e[31mError:$1\e[m\n"
@@ -261,7 +268,7 @@ function set-std () {
     print-error "Missing argument after \`-std\`."
     exit 1
   fi
-  if echo | gcc -std="$1" -fsyntax-only -xc - >/dev/null 2>&1; then
+  if echo | "$cc" -std="$1" -fsyntax-only -xc - >/dev/null 2>&1; then
     std=$1
   else
     print-error "Unrecognized option for \`-std\`: $1"
@@ -272,7 +279,7 @@ function set-std () {
 function compile-and-run () {
   local bin=$(mktemp)
   local output="$(\
-    echo "$src" |gcc $(ccflags) -o $bin \
+    echo "$src" | "$cc" $(ccflags) -o $bin \
     2>&1)"
   if [ -x $bin ]; then
     $bin
@@ -286,6 +293,7 @@ function compile-and-run () {
 }
 
 function main () {
+  prove-gcc-exists
   local opt
   for opt in "$@"; do
     case $opt in
